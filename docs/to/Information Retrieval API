@@ -1,0 +1,44 @@
+Terms of Use for Information Retrieval API
+
+1. Introduction
+Welcome to our Information Retrieval API. By accessing or using our API, you agree to be bound by these Terms of Use ("Terms"). If you do not agree to all of these Terms, do not use this service.
+
+2. API Service Description
+Our Information Retrieval API allows users to retrieve data based on a unique identifier (ID) from a Google Spreadsheet. The API returns data categorized under specific fields such as category and content.
+
+3. Permitted Use
+You are granted a limited, non-exclusive, non-transferable, and revocable license to access and use the API solely for your personal or internal business purposes. You agree not to use the API for any illegal or unauthorized purpose.
+
+4. Restrictions
+You must not:
+
+Modify, distribute, or create derivative works based on the API.
+Reverse engineer or attempt to extract the source code of the API.
+Use the API in a way that could harm, overburden, or impair any server, or the network(s) connected to any server.
+Engage in any activity that interferes with or disrupts the performance of the API.
+5. Changes and Availability
+We reserve the right to modify, suspend, or discontinue the API (in whole or in part) at any time, with or without notice. We will not be liable to you or any third party should any such modification, suspension, or discontinuation occur.
+
+6. Data Privacy
+Please refer to our Privacy Policy [link to the Privacy Policy] for information on how we collect, use, and protect your data.
+
+7. Intellectual Property
+All rights, title, and interest in and to the API and its components (including all intellectual property rights) are and will remain the exclusive property of the API providers and its licensors.
+
+8. Disclaimer of Warranties
+The API is provided "as is" and "as available" without any warranties of any kind, whether express or implied. We expressly disclaim all warranties, including but not limited to the accuracy, reliability, and completeness of the data retrieved through our API.
+
+9. Limitation of Liability
+To the fullest extent permitted by applicable law, in no event will we be liable for any indirect, incidental, special, consequential, or punitive damages arising out of or related to your use of the API.
+
+10. Indemnification
+You agree to indemnify, defend, and hold harmless the API providers and its officers, directors, employees, agents, affiliates, and licensors from any and all claims, damages, liabilities, costs, and fees (including reasonable attorneys’ fee) arising from your use of the API or your violation of these Terms.
+
+11. Governing Law
+These Terms shall be governed by and construed in accordance with the laws of [your jurisdiction], without regard to its conflict of law provisions.
+
+12. Changes to These Terms
+We reserve the right to update or modify these Terms at any time without prior notice. Your continued use of the API after any such changes constitutes your acceptance of the new Terms.
+
+13. Contact Us
+If you have any questions about these Terms, please contact us at [your contact information].
