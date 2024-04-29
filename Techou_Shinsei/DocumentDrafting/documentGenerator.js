@@ -1,3 +1,4 @@
+//反論書を自動生成するためのスクリプト。
 const LegalReferences = require('../TextBasedDatabase/legalReferences');
 
 class DocumentGenerator {
