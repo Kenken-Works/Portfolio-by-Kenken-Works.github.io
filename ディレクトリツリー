@@ -1,8 +1,0 @@
-Techou_Shinsei/
-├── DocumentDrafting/
-│   ├── documentGenerator.js
-│   └── documentManager.js
-├── LegalCompliance/
-│   └── complianceChecker.js
-└── TextBasedDatabase/
-    └── legalReferences.js
