@@ -3,54 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ポートフォリオ</title>
-    <link rel="stylesheet" href="styles/main.css">
+    <title>お問い合わせフォーム</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #F5F5F5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        form {
+            max-width: 500px;
+            width: 100%;
+            background-color: #FFFFFF;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in-out;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #555;
+        }
+        input[type=text], input[type=email], input[type=tel], textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #CCCCCC;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        input[type=submit] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+        input[type=submit]:hover {
+            background-color: #3E8E41;
+        }
+        .required:after {
+            content: "*";
+            color: red;
+            margin-left: 5px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>私のポートフォリオへようこそ</h1>
-    </header>
-    <nav>
-        <ul>
-            <li><a href="#about">私について <img src="icon_about.png" alt="私についてアイコン" class="icon"></a></li>
-            <li><a href="#projects">プロジェクト <img src="icon_projects.png" alt="プロジェクトアイコン" class="icon"></a></li>
-            <li><a href="#contact">接触 <img src="icon_contact.png" alt="接触アイコン" class="icon"></a></li>
-        </ul>
-    </nav>
-    <main>
-        <section id="about">
-            <h2>私について <img src="icon_about.png" alt="私についてアイコン" class="icon"></h2>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eget velit vel ligula placerat elementum in vel libero. Nam euismod elit ac tellus dignissim, non luctus nisl ultricies. Phasellus vulputate ligula at est porttitor, nec venenatis dui faucibus.
-            </p>
-            <p>
-                Duis nec risus scelerisque, consequat nulla at, aliquam eros. Integer sit amet justo sed urna facilisis convallis. Fusce varius massa at arcu porttitor, at venenatis sem bibendum. Vestibulum sodales erat nec suscipit suscipit. Nam suscipit sollicitudin urna, ut scelerisque metus ornare non.
-            </p>
-        </section>
-        <section id="projects">
-            <h2>プロジェクト <img src="icon_projects.png" alt="プロジェクトアイコン" class="icon"></h2>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet justo sed urna facilisis convallis. Fusce varius massa at arcu porttitor, at venenatis sem bibendum. Vestibulum sodales erat nec suscipit suscipit.
-            </p>
-            <p>
-                Nam suscipit sollicitudin urna, ut scelerisque metus ornare non. Aliquam erat volutpat. Praesent facilisis, orci a euismod finibus, tortor magna facilisis magna, ac congue arcu turpis eu erat. Ut euismod vulputate ex, vel cursus mauris facilisis a. Nulla facilisi.
-            </p>
-        </section>
-        <section id="contact">
-            <h2>接触 <img src="icon_contact.png" alt="接触アイコン" class="icon"></h2>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eget velit vel ligula placerat elementum in vel libero. Nam euismod elit ac tellus dignissim, non luctus nisl ultricies. Phasellus vulputate ligula at est porttitor, nec venenatis dui faucibus.
-            </p>
-            <p>
-                Duis nec risus scelerisque, consequat nulla at, aliquam eros. Integer sit amet justo sed urna facilisis convallis. Fusce varius massa at arcu porttitor, at venenatis sem bibendum. Vestibulum sodales erat nec suscipit suscipit. Nam suscipit sollicitudin urna, ut scelerisque metus ornare non.
-            </p>
-        </section>
-    </main>
-    <footer>
-        <p>© 2024 あなたの名前</p>
-    </footer>
+    <form method="POST" action="submit.php">
+        <h1>お問い合わせフォーム</h1>
+        <label for="name" class="required">お名前</label>
+        <input type="text" id="name" name="name" required>
 
-    <script src="scripts/scroll.js"></script>
+        <label for="email" class="required">メールアドレス</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="tel">電話番号</label>
+        <input type="tel" id="tel" name="tel">
+
+        <label for="message" class="required">お問い合わせ内容</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+
+        <input type="submit" value="送信">
+    </form>
 </body>
 </html>
-
