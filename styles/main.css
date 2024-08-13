@@ -97,6 +97,12 @@ form input[type=submit]:hover {
 .error {
     border-color: red;
 }
+#tetrisCanvas {
+    display: block;
+    margin: 0 auto;
+    background-color: #000;
+    border: 2px solid #333;
+}
 
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-10px); }
