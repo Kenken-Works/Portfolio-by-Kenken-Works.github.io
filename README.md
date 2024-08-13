@@ -5,6 +5,11 @@
 https://kenken-works.github.io/Portfolio-by-Kenken-Works.github.io/#about
 にてウェブページで公開する
 
+テトリス
+https://github.com/Kenken-Works/Portfolio-by-Kenken-Works.github.io/blob/Portfolio_01/Tetris%20Game%20Final%20HTML%20File.html
+
+→自宅のLinux_Ubuntuサーバーからアクセスできるように将来的に可用性、冗長性を広げる
+
 →公開した内容を印刷して　用紙でも見れるようにする。
 
 
