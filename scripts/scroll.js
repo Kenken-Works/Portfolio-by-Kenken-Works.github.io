@@ -1,28 +1,28 @@
 window.addEventListener('DOMContentLoaded', (event) => {
-    // Adding scroll event listener
-    document.addEventListener('scroll', () => {
-        let scrollPosition = window.scrollY;
-        console.log("Scroll Position: ", scrollPosition);
+    // Smooth scrolling
+    document.querySelectorAll('nav ul li a').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
     });
 
-    // Function to scroll down by one screen height
-    function scrollDown() {
-        window.scrollBy({
-            top: window.innerHeight, // Move by one viewport height
-            behavior: 'smooth' // Smooth scrolling
-        });
-    }
+    // Cool scroll animation
+    let lastScrollTop = 0;
 
-    // Function to scroll up by one screen height
-    function scrollUp() {
-        window.scrollBy({
-            top: -window.innerHeight, // Move by one viewport height
-            behavior: 'smooth' // Smooth scrolling
-        });
-    }
+    window.addEventListener('scroll', function() {
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-    // Example: automatically scroll down after 2 seconds
-    setTimeout(scrollDown, 2000);
-
-    // Attach scroll functions to button or events as needed
+        if (scrollTop > lastScrollTop) {
+            console.log("Scrolling Down");
+            // Add custom animation or effect while scrolling down
+        } else {
+            console.log("Scrolling Up");
+            // Add custom animation or effect while scrolling up
+        }
+        lastScrollTop = scrollTop;
+    });
 });
