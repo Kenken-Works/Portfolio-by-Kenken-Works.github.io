@@ -1,0 +1,26 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    padding: 10px;
+}
+
+header, footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+main {
+    font-size: 18px; /* Larger font size for better readability on mobile */
+    padding: 20px;
+}
+
+section#dummy-text p {
+    margin-bottom: 20px;
+}
+
+footer {
+    margin-top: 50px;
+    font-size: 0.9em;
+    color: #777;
+}
