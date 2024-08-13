@@ -3,86 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>お問い合わせフォーム</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #F5F5F5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        form {
-            max-width: 500px;
-            width: 100%;
-            background-color: #FFFFFF;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-            animation: fadeIn 1s ease-in-out;
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 8px;
-            color: #555;
-        }
-        input[type=text], input[type=email], input[type=tel], textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #CCCCCC;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            font-size: 16px;
-        }
-        input[type=submit] {
-            background-color: #4CAF50;
-            color: white;
-            padding: 12px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-            font-size: 18px;
-            transition: background-color 0.3s ease;
-        }
-        input[type=submit]:hover {
-            background-color: #3E8E41;
-        }
-        .required:after {
-            content: "*";
-            color: red;
-            margin-left: 5px;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
+    <title>私のポートフォリオ</title>
+    <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
-    <form method="POST" action="submit.php">
-        <h1>お問い合わせフォーム</h1>
-        <label for="name" class="required">お名前</label>
-        <input type="text" id="name" name="name" required>
+    <header>
+        <h1>私のポートフォリオへようこそ</h1>
+    </header>
 
-        <label for="email" class="required">メールアドレス</label>
-        <input type="email" id="email" name="email" required>
+    <nav>
+        <ul>
+            <li><a href="#about">私について <img src="images/icon_about.png" alt="私についてアイコン" class="icon"></a></li>
+            <li><a href="#projects">プロジェクト <img src="images/icon_projects.png" alt="プロジェクトアイコン" class="icon"></a></li>
+            <li><a href="#contact">お問い合わせ <img src="images/icon_contact.png" alt="お問い合わせアイコン" class="icon"></a></li>
+        </ul>
+    </nav>
 
-        <label for="tel">電話番号</label>
-        <input type="tel" id="tel" name="tel">
+    <main>
+        <section id="about">
+            <h2>私について</h2>
+            <p>ここに自己紹介文を入れます。Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+        </section>
 
-        <label for="message" class="required">お問い合わせ内容</label>
-        <textarea id="message" name="message" rows="5" required></textarea>
+        <section id="projects">
+            <h2>プロジェクト</h2>
+            <p>ここにプロジェクトの紹介文を入れます。Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+        </section>
 
-        <input type="submit" value="送信">
-    </form>
+        <section id="contact">
+            <h2>お問い合わせ</h2>
+            <form id="contactForm" method="POST" action="submit.php">
+                <label for="name" class="required">お名前</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email" class="required">メールアドレス</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="tel">電話番号</label>
+                <input type="tel" id="tel" name="tel">
+
+                <label for="message" class="required">お問い合わせ内容</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+
+                <input type="submit" value="送信">
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2024 あなたの名前</p>
+    </footer>
+
+    <script src="scripts/scroll.js"></script>
+    <script src="scripts/form-validation.js"></script>
 </body>
 </html>
