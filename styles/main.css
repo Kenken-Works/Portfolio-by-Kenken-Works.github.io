@@ -2,6 +2,7 @@ body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
     padding: 10px;
+    margin: 0;
 }
 
 header, footer {
@@ -10,12 +11,59 @@ header, footer {
     background-color: #f4f4f4;
 }
 
+header h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+nav ul {
+    display: flex;
+    justify-content: space-around;
+    list-style-type: none;
+    padding: 0;
+    background-color: #333;
+}
+
+nav ul li {
+    margin: 0;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+}
+
+nav ul li a .icon {
+    margin-left: 10px;
+    width: 20px;
+    height: 20px;
+}
+
 main {
-    font-size: 18px; /* Larger font size for better readability on mobile */
     padding: 20px;
 }
 
-section#dummy-text p {
+main section {
+    margin-bottom: 100px;
+}
+
+main section h2 {
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+}
+
+main section h2 .icon {
+    margin-left: 10px;
+    width: 24px;
+    height: 24px;
+}
+
+main section p {
+    font-size: 20px;
     margin-bottom: 20px;
 }
 
