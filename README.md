@@ -2,7 +2,7 @@
 ### ポートフォリオ作成
 
 公開方法：
-https://github.com/Kenken-Works/Portfolio-by-Kenken-Works.github.io/tree/Portfolio_01/root
+https://kenken-works.github.io/Portfolio-by-Kenken-Works.github.io/#about
 にてウェブページで公開する
 
 →公開した内容を印刷して　用紙でも見れるようにする。
