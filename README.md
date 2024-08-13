@@ -26,7 +26,7 @@ https://kenken-works.github.io/Portfolio-by-Kenken-Works.github.io/Tetris.html
 
 ・1:　WEBサーバーを起動して、遠隔でjava script版テトリスを操作する
 
-・2:　リポジトリ名: linux-infrastructure-setup
+・2:　リポジトリ名: ｛  未定｝
 　　　このリポジトリは、Linuxサーバーの構築、保守、運用に関する詳細なドキュメント、
 スクリプト、および設定ファイルを提供し、エンジニアが効率的にシステムを管理できるよう支援することを目的としています。特に、logwatchによるログ管理、Elastic Stackの設定、基礎的なセキュリティ強化に重点を当てています。
 
