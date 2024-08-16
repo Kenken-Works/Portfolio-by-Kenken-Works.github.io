@@ -51,6 +51,17 @@
         #how-to-play li {
             margin-bottom: 10px;
         }
+
+        #log {
+            margin-top: 20px;
+            max-width: 320px;
+            max-height: 200px;
+            overflow-y: auto;
+            font-size: 14px;
+            background-color: #222;
+            border: 1px solid #fff;
+            padding: 10px;
+        }
     </style>
 </head>
 <body>
@@ -58,6 +69,7 @@
         <div>
             <div id="score">Score: 0</div>
             <canvas id="tetris" width="320" height="640" aria-label="Tetris game canvas"></canvas>
+            <div id="log">ログ:</div> <!-- ここにログが表示されます -->
         </div>
         <div id="how-to-play">
             <h2>テトリスの遊び方</h2>
@@ -76,6 +88,12 @@
         const canvas = document.getElementById('tetris');
         const context = canvas.getContext('2d');
         context.scale(20, 20);
+
+        function log(message) {
+            const logElement = document.getElementById('log');
+            logElement.innerHTML += `<div>${message}</div>`;
+            logElement.scrollTop = logElement.scrollHeight; // 常に最新のログを表示
+        }
 
         function arenaSweep() {
             let rowCount = 1;
@@ -164,6 +182,7 @@
         }
 
         function playerRotate(dir) {
+            log('回転開始');
             const pos = player.pos.x;
             let offset = 1;
             rotate(player.matrix, dir);
@@ -173,9 +192,11 @@
                 if (offset > player.matrix[0].length) {
                     rotate(player.matrix, -dir);
                     player.pos.x = pos;
+                    log('回転できません');
                     return;
                 }
             }
+            log('回転完了');
         }
 
         function drawMatrix(matrix, offset) {
@@ -273,6 +294,7 @@
                 arena.forEach(row => row.fill(0));
                 player.score = 0;
                 updateScore();
+                log('ゲームオーバー');
             }
         }
 
@@ -283,7 +305,7 @@
         const arena = createMatrix(16, 32);
 
         const player = {
-            pos:　{x: 0, y: 0},
+            pos: {x: 0, y: 0},
             matrix: null,
             score: 0,
         };
@@ -308,14 +330,19 @@
         document.addEventListener('keydown', event => {
             if (event.key === 'ArrowLeft') {
                 playerMove(-1);
+                log('左に移動');
             } else if (event.key === 'ArrowRight') {
                 playerMove(1);
+                log('右に移動');
             } else if (event.key === 'ArrowDown') {
                 playerDrop();
+                log('高速落下');
             } else if (event.key === 'x' || event.key === 'X') {
                 playerRotate(1);
+                log('右回転');
             } else if (event.key === 'z' || event.key === 'Z') {
                 playerRotate(-1);
+                log('左回転');
             }
         });
 
