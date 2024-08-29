@@ -16,8 +16,7 @@
             <li><a href="#about">私について <img src="images/icon_about.png" alt="私についてアイコン" class="icon"></a></li>
             <li><a href="#projects">プロジェクト <img src="images/icon_projects.png" alt="プロジェクトアイコン" class="icon"></a></li>
             <li><a href="https://kenken-works.github.io/Portfolio-by-Kenken-Works.github.io/Tetris.html">テトリスを遊ぶ</a></li>
-　　　　　　<li><a href="tetris.html">テトリス <img src="images/icon_tetris.png" alt="テトリスアイコン" class="icon"></a></li>
-            
+            <li><a href="tetris.html">テトリス <img src="images/icon_tetris.png" alt="テトリスアイコン" class="icon"></a></li>
         </ul>
     </nav>
 
@@ -62,8 +61,42 @@
         <p>© 2024 あなたの名前</p>
     </footer>
 
+    <!-- JavaScriptコードをここに追加 -->
     <script src="scripts/scroll.js"></script>
     <script src="scripts/form-validation.js"></script>
     <script src="scripts/tetris.js"></script> <!-- テトリス用のスクリプト -->
+
+    <script>
+    document.getElementById("contactForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        var formData = {
+            name: document.getElementById("name").value,
+            email: document.getElementById("email").value,
+            tel: document.getElementById("tel").value,
+            message: document.getElementById("message").value
+        };
+
+        fetch('https://script.google.com/macros/s/AKfycbw_shDavHH_k7muwoElBxOX_QPrGA_W6AskNpuh9iCRQpJHvDn7U_uzAgxwXX-KXh_tbg/exec', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.result === 'success') {
+                alert('お問い合わせ内容が送信されました。');
+            } else {
+                alert('送信中にエラーが発生しました。');
+            }
+        })
+        .catch(error => {
+            console.error('エラー:', error);
+            alert('送信中にエラーが発生しました。');
+        });
+    });
+    </script>
 </body>
 </html>
