@@ -45,7 +45,7 @@ jobs:
 
     - name: Run Selenium test
       run: |
-        npm install selenium-webdriver
+        npm install selenium-webdriver dotenv google-spreadsheet
         node test/form-test.js
 
     - name: Notify on failure
