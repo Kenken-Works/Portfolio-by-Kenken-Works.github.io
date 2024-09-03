@@ -1,5 +1,3 @@
-// modal.js
-
 // モーダルウィンドウの取得
 const tetrisModal = document.getElementById("tetrisModal");
 const contactModal = document.getElementById("contactModal");
@@ -35,10 +33,17 @@ closeContactModalBtn.onclick = function() {
 window.onclick = function(event) {
     if (event.target == tetrisModal) {
         tetrisModal.style.display = "none";
-      }
+    }
     if (event.target == contactModal) {
-        contactModal.
- 
-style.display = "none";
+        contactModal.style.display = "none";
     }
 }
+
+// Additional modal handling code
+document.getElementById('openModal').addEventListener('click', function() {
+    document.getElementById('myModal').style.display = 'block';
+});
+
+document.getElementById('closeModal').addEventListener('click', function() {
+    document.getElementById('myModal').style.display = 'none';
+});
