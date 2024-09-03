@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
@@ -14,9 +13,9 @@
     <nav>
         <ul>
             <li><a href="#about">私について <img src="images/icon_about.png" alt="私についてアイコン" class="icon"></a></li>
-            <li><a href="#projects">プロジェクト <img src="images/icon_projects.png" alt="プロジェクトアイコン" class="icon"></a></li>
+            <li><a href="#projects">スキルシート <img src="images/icon_projects.png" alt="プロジェクトアイコン" class="icon"></a></li>
             <li><a href="https://kenken-works.github.io/Portfolio-by-Kenken-Works.github.io/Tetris.html">テトリスを遊ぶ</a></li>
-            <li><a href="tetris.html">テトリス <img src="images/icon_tetris.png" alt="テトリスアイコン" class="icon"></a></li>
+            <li><a href="tetris.html">アレクサ開発 <img src="images/icon_tetris.png" alt="テトリスアイコン" class="icon"></a></li>
         </ul>
     </nav>
 
@@ -33,26 +32,26 @@
 
         <section id="contact">
             <h2>お問い合わせ</h2>
-　　　　　<form id="contactForm" method="POST" action="YOUR_DEPLOYED_URL">
-   　　　　　　 <label for="name" class="required">お名前</label>
-   　　　　　　 <input type="text" id="name" name="name" autocomplete="name" required="">
+            <form id="contactForm">
+                <label for="name" class="required">お名前</label>
+                <input type="text" id="name" name="name" autocomplete="name" required>
 
-         <label for="email" class="required">メールアドレス</label>
-              <input type="email" id="email" name="email" autocomplete="email" required="">
+                <label for="email" class="required">メールアドレス</label>
+                <input type="email" id="email" name="email" autocomplete="email" required>
 
-              <label for="tel">電話番号</label>
-              <input type="tel" id="tel" name="tel" autocomplete="tel">
+                <label for="tel">電話番号</label>
+                <input type="tel" id="tel" name="tel" autocomplete="tel">
 
-              <label for="message" class="required">お問い合わせ内容</label>
-              <textarea id="message" name="message" rows="5" autocomplete="off" required=""></textarea>
+                <label for="message" class="required">お問い合わせ内容</label>
+                <textarea id="message" name="message" rows="5" autocomplete="off" required></textarea>
 
-         <input type="submit" value="送信">
-       </form>
+                <input type="submit" value="送信">
+            </form>
         </section>
 
         <!-- テトリスゲームセクション -->
         <section id="tetris">
-            <h2>テトリスで遊ぶ</h2>
+            <h2>ゲームをお願い致します。遊ぶ</h2>
             <canvas id="tetrisCanvas"></canvas>
         </section>
     </main>
@@ -66,14 +65,22 @@
         document.getElementById("contactForm").addEventListener("submit", function(event) {
             event.preventDefault();
 
+            // フォームデータを取得
             var formData = {
-                name: document.getElementById("name").value,
-                email: document.getElementById("email").value,
-                tel: document.getElementById("tel").value,
-                message: document.getElementById("message").value
+                name: document.getElementById("name").value.trim(),
+                email: document.getElementById("email").value.trim(),
+                tel: document.getElementById("tel").value.trim(),
+                message: document.getElementById("message").value.trim()
             };
 
-            fetch('https://script.google.com/macros/s/AKfycbxAc0cSqyn5Lio95ZEpNQBcHEOiGWURNRhOw1DwXAOHdf3zufFIY1JTmCnbViOOhYVs/exec', {  // ここにデプロイされたGASのURLを設定
+            // 簡単なバリデーション
+            if (!formData.name || !formData.email || !formData.message) {
+                alert("必須項目をすべて入力してください。");
+                return;
+            }
+
+            // POSTリクエストを送信
+            fetch('http://192.168.100.17:3000/submit-form', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -82,7 +89,7 @@
             })
             .then(response => response.json())
             .then(data => {
-                if (data.result === 'success') {
+                if (data.message === 'Data submitted successfully') {
                     alert('お問い合わせ内容が送信されました。');
                 } else {
                     alert('送信中にエラーが発生しました。');
