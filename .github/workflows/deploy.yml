@@ -1,0 +1,31 @@
+name: GitHub Pages Deploy
+
+on:
+  push:
+    branches:
+      - gh-pages  # ここをデプロイしたいブランチ名に変更してください
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out the repository
+      uses: actions/checkout@v2
+
+    - name: Install Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16' # 必要に応じてNode.jsのバージョンを変更
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build the project
+      run: npm run build # プロジェクトにビルドステップがあればここで実行
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./dist # 出力フォルダを指定 (ビルド結果がこのディレクトリに出力される場合)
