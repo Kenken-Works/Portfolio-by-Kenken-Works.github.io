@@ -46,6 +46,46 @@ section {
     margin-bottom: 50px;
 }
 
+/* モーダルウィンドウのスタイル */
+.modal {
+    display: none; /* 隠す */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7); /* 半透明の背景 */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 form {
     max-width: 500px;
     margin: 0 auto;
@@ -97,6 +137,7 @@ form input[type=submit]:hover {
 .error {
     border-color: red;
 }
+
 #tetrisCanvas {
     display: block;
     margin: 0 auto;
