@@ -4,7 +4,7 @@
 function openModal() {
     const modal = document.getElementById('myModal');
     modal.style.display = 'block';
-} // Closing bracket added
+}
 
 // Get the modal elements
 const tetrisModal = document.getElementById("tetrisModal");
