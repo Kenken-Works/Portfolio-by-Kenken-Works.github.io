@@ -1,0 +1,39 @@
+# リポジトリのチェックアウト: GitHub リポジトリのコードをワークフロー実行環境にダウンロードします。
+# Node.js のセットアップ: Node.js 環境を準備し、指定されたバージョン (この例では Node.js 16) をインストールします。
+# 依存関係のインストール: プロジェクトに必要なライブラリやモジュールをインストールします。
+# プロジェクトのビルド: プロジェクトのソースコードをビルドし、実行可能な状態にします。
+# GitHub Pages へのデプロイ: ビルドされたファイルを GitHub Pages にデプロイします。
+
+
+name: GitHub Pages Deploy
+
+on:
+  push:
+    branches:
+      - deploy  # ここをデプロイしたいブランチ名に変更してください
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out the repository
+      uses: actions/checkout@v2
+
+    - name: Install Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16' # 必要に応じてNode.jsのバージョンを変更
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build the project
+      run: npm run build # プロジェクトにビルドステップがあればここで実行
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./dist # 出力フォルダを指定 (ビルド結果がこのディレクトリに出力される場合)
+        publish_branch: deploy  # デプロイ先を 'deploy' ブランチに変更

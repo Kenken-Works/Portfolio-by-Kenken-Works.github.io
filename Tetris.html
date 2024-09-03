@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>テトリスゲーム</title>
+    <meta name="description" content="A simple Tetris game built with HTML5 and JavaScript.">
+    <meta name="author" content="Game Builder KEN">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        #game-container {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        canvas {
+            background-color: #111;
+            border: 1px solid #fff;
+        }
+
+        #score {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        #how-to-play {
+            margin-left: 20px;
+            max-width: 200px;
+        }
+
+        #how-to-play h2 {
+            margin-top: 0;
+            font-size: 20px;
+        }
+
+        #how-to-play ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        #how-to-play li {
+            margin-bottom: 10px;
+        }
+
+        #log {
+            margin-top: 20px;
+            max-width: 320px;
+            max-height: 200px;
+            overflow-y: auto;
+            font-size: 14px;
+            background-color: #222;
+            border: 1px solid #fff;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <div>
+            <div id="score">Score: 0</div>
+            <canvas id="tetris" width="320" height="640" aria-label="Tetris game canvas"></canvas>
+            <div id="log">ログ:</div> <!-- ここにログが表示されます -->
+        </div>
+        <div id="how-to-play">
+            <h2>テトリスの遊び方</h2>
+            <ul>
+                <li><strong>左右移動:</strong> 左矢印キー（←）で左に移動、右矢印キー（→）で右に移動します。</li>
+                <li><strong>高速落下:</strong> 下矢印キー（↓）でテトリミノが高速で下に落ちます。</li>
+                <li><strong>回転:</strong> Zキーで左回転、Xキーで右回転します。</li>
+                <li><strong>スコア:</strong> テトリミノが横一列に揃うと、その列が消え、スコアが加算されます。</li>
+                <li><strong>ゲームオーバー:</strong> テトリミノが画面上部に到達するとゲームオーバーです。</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Initialize the canvas and context
+        const canvas = document.getElementById('tetris');
+        const context = canvas.getContext('2d');
+        context.scale(20, 20);
+
+        function log(message) {
+            const logElement = document.getElementById('log');
+            logElement.innerHTML += `<div>${message}</div>`;
+            logElement.scrollTop = logElement.scrollHeight; // 常に最新のログを表示
+        }
+
+        function arenaSweep() {
+            let rowCount = 1;
+            outer: for (let y = arena.length - 1; y > 0; --y) {
+                for (let x = 0; x < arena[y].length; ++x) {
+                    if (arena[y][x] === 0) {
+                        continue outer;
+                    }
+                }
+
+                const row = arena.splice(y, 1)[0].fill(0);
+                arena.unshift(row);
+                ++y;
+
+                player.score += rowCount * 10;
+                rowCount *= 2;
+            }
+        }
+
+        function collide(arena, player) {
+            const [m, o] = [player.matrix, player.pos];
+            for (let y = 0; y < m.length; ++y) {
+                for (let x = 0; x < m[y].length; ++x) {
+                    if (m[y][x] !== 0 &&
+                        (arena[y + o.y] &&
+                        arena[y + o.y][x + o.x]) !== 0) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        function createMatrix(w, h) {
+            const matrix = [];
+            while (h--) {
+                matrix.push(new Array(w).fill(0));
+            }
+            return matrix;
+        }
+
+        function createPiece(type) {
+            if (type === 'T') {
+                return [
+                    [0, 0, 0],
+                    [1, 1, 1],
+                    [0, 1, 0],
+                ];
+            } else if (type === 'O') {
+                return [
+                    [2, 2],
+                    [2, 2],
+                ];
+            } else if (type === 'L') {
+                return [
+                    [0, 0, 3],
+                    [3, 3, 3],
+                    [0, 0, 0],
+                ];
+            } else if (type === 'J') {
+                return [
+                    [4, 0, 0],
+                    [4, 4, 4],
+                    [0, 0, 0],
+                ];
+            } else if (type === 'I') {
+                return [
+                    [0, 5, 0, 0],
+                    [0, 5, 0, 0],
+                    [0, 5, 0, 0],
+                    [0, 5, 0, 0],
+                ];
+            } else if (type === 'S') {
+                return [
+                    [0, 6, 6],
+                    [6, 6, 0],
+                    [0, 0, 0],
+                ];
+            } else if (type === 'Z') {
+                return [
+                    [7, 7, 0],
+                    [0, 7, 7],
+                    [0, 0, 0],
+                ];
+            }
+        }
+
+        function playerRotate(dir) {
+            log('回転開始');
+            const pos = player.pos.x;
+            let offset = 1;
+            rotate(player.matrix, dir);
+            while (collide(arena, player)) {
+                player.pos.x += offset;
+                offset = -(offset + (offset > 0 ? 1 : -1));
+                if (offset > player.matrix[0].length) {
+                    rotate(player.matrix, -dir);
+                    player.pos.x = pos;
+                    log('回転できません');
+                    return;
+                }
+            }
+            log('回転完了');
+        }
+
+        function drawMatrix(matrix, offset) {
+            matrix.forEach((row, y) => {
+                row.forEach((value, x) => {
+                    if (value !== 0) {
+                        context.fillStyle = getColor(value);
+                        context.fillRect(x + offset.x,
+                                         y + offset.y,
+                                         1, 1);
+                    }
+                });
+            });
+        }
+
+        function getColor(value) {
+            const colors = [
+                null,
+                '#FF0D72', // T
+                '#0DC2FF', // O
+                '#0DFF72', // L
+                '#F538FF', // J
+                '#FF8E0D', // I
+                '#FFE138', // S
+                '#3877FF', // Z
+            ];
+            return colors[value];
+        }
+
+        function draw() {
+            context.fillStyle = '#000';
+            context.fillRect(0, 0, canvas.width, canvas.height);
+
+            drawMatrix(arena, {x: 0, y: 0});
+            drawMatrix(player.matrix, player.pos);
+        }
+
+        function merge(arena, player) {
+            player.matrix.forEach((row, y) => {
+                row.forEach((value, x) => {
+                    if (value !== 0) {
+                        arena[y + player.pos.y][x + player.pos.x] = value;
+                    }
+                });
+            });
+        }
+
+        function rotate(matrix, dir) {
+            for (let y = 0; y < matrix.length; ++y) {
+                for (let x = 0; x < y; ++x) {
+                    [
+                        matrix[x][y],
+                        matrix[y][x],
+                    ] = [
+                        matrix[y][x],
+                        matrix[x][y],
+                    ];
+                }
+            }
+
+            if (dir > 0) {
+                matrix.forEach(row => row.reverse());
+            } else {
+                matrix.reverse();
+            }
+        }
+
+        function playerDrop() {
+            player.pos.y++;
+            if (collide(arena, player)) {
+                player.pos.y--;
+                merge(arena, player);
+                playerReset();
+                arenaSweep();
+                updateScore();
+            }
+            dropCounter = 0;
+        }
+
+        function playerMove(dir) {
+            player.pos.x += dir;
+            if (collide(arena, player)) {
+                player.pos.x -= dir;
+            }
+        }
+
+        function playerReset() {
+            const pieces = 'TJLOSZI';
+            player.matrix = createPiece(pieces[pieces.length * Math.random() | 0]);
+            player.pos.y = 0;
+            player.pos.x = (arena[0].length / 2 | 0) -
+                           (player.matrix[0].length / 2 | 0);
+
+            if (collide(arena, player)) {
+                arena.forEach(row => row.fill(0));
+                player.score = 0;
+                updateScore();
+                log('ゲームオーバー');
+            }
+        }
+
+        function updateScore() {
+            document.getElementById('score').innerText = "Score: " + player.score;
+        }
+
+        const arena = createMatrix(16, 32);
+
+        const player = {
+            pos: {x: 0, y: 0},
+            matrix: null,
+            score: 0,
+        };
+
+        let dropCounter = 0;
+        let dropInterval = 1000;
+
+        let lastTime = 0;
+        function update(time = 0) {
+            const deltaTime = time - lastTime;
+            lastTime = time;
+
+            dropCounter += deltaTime;
+            if (dropCounter > dropInterval) {
+                playerDrop();
+            }
+
+            draw();
+            requestAnimationFrame(update);
+        }
+
+        document.addEventListener('keydown', event => {
+            if (event.key === 'ArrowLeft') {
+                playerMove(-1);
+                log('左に移動');
+            } else if (event.key === 'ArrowRight') {
+                playerMove(1);
+                log('右に移動');
+            } else if (event.key === 'ArrowDown') {
+                playerDrop();
+                log('高速落下');
+            } else if (event.key === 'x' || event.key === 'X') {
+                playerRotate(1);
+                log('右回転');
+            } else if (event.key === 'z' || event.key === 'Z') {
+                playerRotate(-1);
+                log('左回転');
+            }
+        });
+
+        playerReset();
+        updateScore();
+        update();
+    </script>
+</body>
+</html>
