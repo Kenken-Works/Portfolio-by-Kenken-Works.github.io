@@ -35,4 +35,10 @@ closeContactModalBtn.onclick = function() {
 window.onclick = function(event) {
     if (event.target == tetrisModal) {
         tetrisModal.style.display = "none";
-   
+      }
+    if (event.target == contactModal) {
+        contactModal.
+ 
+style.display = "none";
+    }
+}
